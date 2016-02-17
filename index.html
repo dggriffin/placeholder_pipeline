@@ -29,44 +29,84 @@
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
-      <h1 class="header center orange-text">Upload an Image</h1>
+      <h1 class="header center orange-text">Upload your Images</h1>
       <div class="row center">
         <h5 class="header col s12 light">A quick test page for image-based operations within Placeholder Pipeline</h5>
       </div>
       <div class="row center">
-      <form action="#">
-        <div class="file-field input-field">
-          <div class="btn">
-            <span>Image</span>
-            <input type="file" multiple accept="image/*">
+          <div class="col s12">
+              <form action="#">
+                <div class="file-field input-field">
+                  <div class="btn">
+                    <span>Underlay</span>
+                    <input type="file" multiple accept="image/*" onchange="loadUnderlay(this)">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                  </div>
+                </div>
+              </form>
           </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text" placeholder="Upload one or more files">
+          <div class="col s6">
+              <form action="#">
+                <div class="file-field input-field">
+                  <div class="btn">
+                    <span>Insertion</span>
+                    <input type="file" multiple accept="image/*" onchange="loadInsertion(this)">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload one file">
+                  </div>
+                </div>
+              </form>
           </div>
-        </div>
-      </form>
+          <div class="col s6">
+              <form action="#">
+                <div class="file-field input-field">
+                  <div class="btn">
+                    <span>Mask</span>
+                    <input type="file" multiple accept="image/*" onchange="loadMask(this)">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload one file">
+                  </div>
+                </div>
+              </form>
+          </div>
+          <div class="col s12">
+              <form action="#">
+                <div class="file-field input-field">
+                  <div class="btn">
+                    <span>overlay</span>
+                    <input type="file" multiple accept="image/*" onchange="loadOverlay(this)">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                  </div>
+                </div>
+              </form>
+          </div>
       </div>
       <br><br>
 
     </div>
   </div>
-    
-    <h2 class="center grey-text"> Test Output: </h2>
-    <div class="center" id="something">
+   
+    <h2 id="canvas-header" class="center grey-text" hidden> Canvas Manipulation: </h2>
+    <div id="canvas" class="center"></div>
 
-    </div>
-    
-    <h2 class="center grey-text"> Canvas Manipulation: </h2>
-    <div class ="container">
-        <div id="canvas" class="center grey border"></div>
-    </div>
+    <div id="canvas-submit" class="center" hidden>
+	     <button onclick="submitImage()" class="btn waves-effect waves-light" type="submit" name="action">Submit
+	    	<i class="material-icons right">send</i>
+	  	</button>
+  	</div>
+
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
-  <script src="js/placeholder_ajax.js"></script>
-  <script src="js/canvas.js"></script>
+  <script src="js/app.js"></script>
 
   </body>
 </html>
