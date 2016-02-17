@@ -173,6 +173,8 @@ function submitImage() {
         fd.append('insertionfile', dataURItoBlob(insertion.src), "insertionfile.jpg");
         fd.append('insertionW', stage.findOne('.insertion').width());
         fd.append('insertionH', stage.findOne('.insertion').height());
+        fd.append('resizeInsertion', "resizeInsertion");
+        //fd.append('insertionResizePct', null);
         fd.append('insertionRotation', stage.findOne('.insertion').rotation());
         fd.append('insertionX', stage.findOne('.insertion-group').x());
         fd.append('insertionY', stage.findOne('.insertion-group').y());
@@ -195,7 +197,7 @@ function submitImage() {
         contentType: false,
         type: 'POST',
         success: function(data) {
-            var img = $("<img />").attr('src', data);
+            var img = $("<img />").attr('src', "data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7");
             $('body').append(img);
         }
     });
