@@ -92,14 +92,29 @@
     </div>
   </div>
    
-    <h2 id="canvas-header" class="center grey-text" hidden> Canvas Manipulation: </h2>
-    <div id="canvas" class="center"></div>
-
-    <div id="canvas-submit" class="center" hidden>
-	     <button onclick="submitImage()" class="btn waves-effect waves-light" type="submit" name="action">Submit
-	    	<i class="material-icons right">send</i>
-	  	</button>
-  	</div>
+    <h3 id="canvas-header" class="center grey-text" hidden> Canvas Manipulation: </h3>
+    <div class="center" id="canvas-card" hidden>
+    	<div class="card blue-grey lighten-5" style="display: inline-block !important">
+    		<div class="card-content white-text" id="canvas">
+            </div>
+        	<div class="card-action">
+	        	<div class ="left">
+	              <a id="show-insertion" onclick="toggleShape('insertion')" hidden>Insert
+	              <i class="material-icons small">visibility</i></a>
+	              <a id="show-mask" onclick="toggleShape('mask')" hidden>Mask
+	              <i class="material-icons small">visibility</i></a>
+	              <a id="show-overlay" onclick="toggleShape('overlay')" hidden>Overlay
+	              <i class="material-icons small">visibility</i></a>
+	            </div>
+            	<div id="canvas-submit" class="right padding" hidden>
+				     <button onclick="submitImage()" class="btn waves-effect waves-light" type="submit" name="action">Submit
+				    	<i class="material-icons right">send</i>
+				  	</button>
+			  	</div>
+			  	<br/>
+            </div>
+    	</div>
+    </div>
 
 
   <!--  Scripts-->

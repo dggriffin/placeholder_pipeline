@@ -1,5 +1,6 @@
 var stage, canvas, context, underlay, insertion, mask, overlay;
 var URL_NAME = 'http://devpshelman:5000/upload';
+// var URL_NAME = 'http://lex001331:5000/upload';
 
 function initCanvas(underlayImage) {
     var layer = new Konva.Layer();
@@ -13,14 +14,18 @@ function initCanvas(underlayImage) {
         image: underlayImage
     });
 
+    underlay.name('underlay');
     layer.add(underlay);
     stage.add(layer);
 
     $('#canvas-header').show();
     $('#canvas-submit').show();
+    $('#canvas-card').show();
+    $('#show-underlay').show();
 
     //OVERRIDES FOR STYLING/PLACEMENT OF CANVAS
     $('.konvajs-content').css("margin", "auto");
+
 }
 
 function drawImage(imageObj, name) {
@@ -31,16 +36,17 @@ function drawImage(imageObj, name) {
     image.name(name);
     image.opacity(0.5);
 
-    var darthVaderGroup = new Konva.Group({
+    var anchorImageGroup = new Konva.Group({
         draggable: true
     });
+    anchorImageGroup.name(name + "-group");
 
-    layer.add(darthVaderGroup);
-    darthVaderGroup.add(image);
-    addAnchor(darthVaderGroup, 0, 0, 'topLeft');
-    addAnchor(darthVaderGroup, image.width(), 0, 'topRight');
-    addAnchor(darthVaderGroup, image.width(), image.height(), 'bottomRight');
-    addAnchor(darthVaderGroup, 0, image.height(), 'bottomLeft');
+    layer.add(anchorImageGroup);
+    anchorImageGroup.add(image);
+    addAnchor(anchorImageGroup, 0, 0, 'topLeft');
+    addAnchor(anchorImageGroup, image.width(), 0, 'topRight');
+    addAnchor(anchorImageGroup, image.width(), image.height(), 'bottomRight');
+    addAnchor(anchorImageGroup, 0, image.height(), 'bottomLeft');
 
     // add cursor styling
     image.on('mouseover', function() {
@@ -50,7 +56,14 @@ function drawImage(imageObj, name) {
         document.body.style.cursor = 'default';
     });
 
+    $('#show-' + name).show();
     stage.add(layer);
+    stage.draw();
+}
+
+function toggleShape (shapeName) {
+    var shape =  stage.findOne('.' + shapeName + '-group');
+    shape.visible(!shape.visible());
     stage.draw();
 }
 
@@ -161,8 +174,8 @@ function submitImage() {
         fd.append('insertionW', stage.findOne('.insertion').width());
         fd.append('insertionH', stage.findOne('.insertion').height());
         fd.append('insertionRotation', stage.findOne('.insertion').rotation());
-        fd.append('insertionX', stage.findOne('.insertion').x());
-        fd.append('insertionY', stage.findOne('.insertion').y());
+        fd.append('insertionX', stage.findOne('.insertion-group').x());
+        fd.append('insertionY', stage.findOne('.insertion-group').y());
     }
     if (mask) {
         fd.append('maskfile', dataURItoBlob(mask.src), "maskfile.jpg");
@@ -171,8 +184,8 @@ function submitImage() {
         fd.append('overlayfile', overlay.src);
         fd.append('overlayW', stage.findOne('.overlay').width());
         fd.append('overlayH', stage.findOne('.overlay').height());
-        fd.append('overlayX', stage.findOne('.overlay').x());
-        fd.append('overlayY', stage.findOne('.overlay').y());
+        fd.append('overlayX', stage.findOne('.overlay-group').x());
+        fd.append('overlayY', stage.findOne('.overlay-group').y());
     }
 
     $.ajax({
@@ -296,3 +309,12 @@ function addAnchor(group, x, y, name) {
 
     group.add(anchor);
 }
+
+// var img = $("<img />").attr('src', 'http://devpshelman:4000/rdog')
+//     .on('load', function() {
+//         if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
+//             alert('broken image!');
+//         } else {
+//             $("body").append(img);
+//         }
+// });
